@@ -17,6 +17,7 @@ cp .env.example .env
 
 # 3. Start development server
 npm run dev
+npm start
 
 # 4. Open in browser
 # http://localhost:5173
