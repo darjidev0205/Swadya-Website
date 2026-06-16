@@ -7,6 +7,7 @@ import HomePage  from './pages/HomePage.jsx'
 import ProductsPage from './pages/ProductsPage.jsx'
 import ProductDetailPage from './pages/ProductDetailPage.jsx'
 import InquiryPage from './pages/InquiryPage.jsx'
+import WhatsAppWidget from './components/WhatsAppWidget.jsx'
 
 export default function App() {
   // Set dark class on mount
@@ -25,6 +26,8 @@ export default function App() {
         <Route path="/inquiry"   element={<InquiryPage />}       />
       </Routes>
       <Footer />
+      <WhatsAppWidget />
     </ThemeProvider>
   )
 }
+

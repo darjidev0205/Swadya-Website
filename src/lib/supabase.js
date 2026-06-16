@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl  = import.meta.env.VITE_SUPABASE_URL  || ''
-const supabaseKey  = import.meta.env.VITE_SUPABASE_ANON_KEY || ''
+const supabaseUrl  = "https://rxnztaktsjmeyclomhyx.supabase.co";
+const supabaseKey  = "sb_publishable_BVcQKf704QNvj9dL3Fgxpw_jzK5-HO3";
 
 // Will be null if env vars are not set (app still works with local data)
 export const supabase = supabaseUrl && supabaseKey
