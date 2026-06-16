@@ -34,7 +34,17 @@ export default function FeaturedProducts() {
                   }`}
                   style={active === i ? { background: 'linear-gradient(135deg,rgba(230,126,34,0.12),rgba(192,57,43,0.08))' } : {}}
                 >
-                  <span className="text-3xl">{p.emoji}</span>
+                  <div className="w-10 h-10 rounded-lg overflow-hidden bg-[#1A0F08] border border-white/10 shrink-0 flex items-center justify-center">
+                    <img
+                      src={p.image ? `${import.meta.env.BASE_URL}${p.image.replace(/^\//, '')}` : `${import.meta.env.BASE_URL}images/fallback-product.jpg`}
+                      alt={p.name}
+                      onError={(e) => {
+                        e.target.onerror = null
+                        e.target.src = `${import.meta.env.BASE_URL}images/fallback-product.jpg`
+                      }}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                   <div>
                     <div className="font-display text-sm text-beige font-semibold">{p.name}</div>
                     <div className="text-xs text-beige/40 mt-0.5">₹{p.base_price}/kg · {p.category}</div>
@@ -57,13 +67,17 @@ export default function FeaturedProducts() {
               transition={{ duration: 0.4 }}
               className="glass rounded-3xl p-8 border border-white/10"
             >
-              <motion.span
-                className="text-7xl block mb-5"
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 3, repeat: Infinity }}
-              >
-                {product.emoji}
-              </motion.span>
+              <div className="h-44 w-full rounded-2xl overflow-hidden bg-[#1A0F08] border border-white/5 mb-6 relative">
+                <img
+                  src={product.image ? `${import.meta.env.BASE_URL}${product.image.replace(/^\//, '')}` : `${import.meta.env.BASE_URL}images/fallback-product.jpg`}
+                  alt={product.name}
+                  onError={(e) => {
+                    e.target.onerror = null
+                    e.target.src = `${import.meta.env.BASE_URL}images/fallback-product.jpg`
+                  }}
+                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                />
+              </div>
               <span className="text-xs tracking-widest uppercase text-saffron font-medium">
                 {product.category === 'herbal' ? 'Herbal Product' : 'Masala & Food'}
               </span>

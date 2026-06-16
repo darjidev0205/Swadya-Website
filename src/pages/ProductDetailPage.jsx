@@ -48,24 +48,28 @@ export default function ProductDetailPage() {
           {/* Left: Visual + info */}
           <div>
             <motion.div
-              className="glass rounded-3xl aspect-square flex items-center justify-center border border-white/10 mb-6 relative overflow-hidden"
+              className="glass rounded-3xl aspect-square flex items-center justify-center border border-white/10 mb-6 relative overflow-hidden bg-[#1A0F08]"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}
             >
-              <div className="absolute inset-0"
+              <div className="absolute inset-0 z-10 pointer-events-none"
                 style={{ background: 'linear-gradient(135deg,rgba(230,126,34,0.08),rgba(192,57,43,0.05))' }} />
-              <motion.span
-                className="text-[8rem] relative z-10"
-                animate={{ y: [0, -14, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                {product.emoji}
-              </motion.span>
+              
+              <img
+                src={product.image ? `${import.meta.env.BASE_URL}${product.image.replace(/^\//, '')}` : `${import.meta.env.BASE_URL}images/fallback-product.jpg`}
+                alt={product.name}
+                onError={(e) => {
+                  e.target.onerror = null
+                  e.target.src = `${import.meta.env.BASE_URL}images/fallback-product.jpg`
+                }}
+                className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                loading="eager"
+              />
 
               {/* Category badge */}
               <span
-                className="absolute top-4 left-4 text-xs font-medium tracking-widest uppercase px-3 py-1.5 rounded-full text-white"
+                className="absolute top-4 left-4 z-20 text-xs font-medium tracking-widest uppercase px-3 py-1.5 rounded-full text-white"
                 style={{ background: 'linear-gradient(135deg,#E67E22,#C0392B)' }}
               >
                 {product.category === 'herbal' ? 'Herbal' : 'Masala & Food'}

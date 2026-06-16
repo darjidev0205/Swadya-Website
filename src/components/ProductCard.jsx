@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
 export default function ProductCard({ product, index = 0 }) {
-  const { id, name, emoji, category, description, base_price } = product
+  const { id, name, image, category, description, base_price } = product
 
   return (
     <motion.div
@@ -16,8 +16,7 @@ export default function ProductCard({ product, index = 0 }) {
       >
         {/* Image area */}
         <div
-          className="h-40 flex items-center justify-center relative overflow-hidden"
-          style={{ background: 'linear-gradient(135deg, rgba(192,57,43,0.15), rgba(107,58,42,0.2))' }}
+          className="h-44 w-full relative overflow-hidden bg-[#1A0F08] flex items-center justify-center shadow-inner"
         >
           {/* Category badge */}
           <span className="absolute top-3 left-3 z-10 text-[10px] font-medium tracking-widest uppercase px-2.5 py-1 rounded-full text-white"
@@ -26,12 +25,22 @@ export default function ProductCard({ product, index = 0 }) {
           </span>
 
           {/* Hover glow */}
-          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400"
-            style={{ background: 'linear-gradient(135deg,rgba(230,126,34,0.12),transparent)' }} />
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 z-10 pointer-events-none"
+            style={{ background: 'linear-gradient(135deg,rgba(230,126,34,0.3),transparent)' }} />
 
-          <span className="text-6xl relative z-10 group-hover:scale-110 transition-transform duration-400">
-            {emoji}
-          </span>
+          {/* Product Image with dynamic object-fit based on type */}
+          <img
+            src={image ? `${import.meta.env.BASE_URL}${image.replace(/^\//, '')}` : `${import.meta.env.BASE_URL}images/fallback-product.jpg`}
+            alt={name}
+            onError={(e) => {
+              e.target.onerror = null
+              e.target.src = `${import.meta.env.BASE_URL}images/fallback-product.jpg`
+            }}
+            className={`w-full h-full ${
+              category === 'herbal' ? 'object-cover' : 'object-cover'
+            } transform group-hover:scale-105 transition-transform duration-500 ease-out`}
+            loading="lazy"
+          />
         </div>
 
         {/* Body */}
@@ -58,3 +67,4 @@ export default function ProductCard({ product, index = 0 }) {
     </motion.div>
   )
 }
+
